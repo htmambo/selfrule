@@ -1,0 +1,11 @@
+# Name: Singapore
+payload:
+  - DOMAIN,workhw02.xingread.cn
+  - IP-CIDR,118.26.110.96/32
+  - IP-CIDR,66.42.55.92/32
+  - IP-CIDR,152.32.217.143/32
+  # github的新加坡服务器地址，但是目前的新加坡节点大部分SSH不成功，所以强制走香港节点
+  # 公司的海外项目，IP实际是新加坡，但是GEOIP的定位是美国，所以需要强制走新加坡节点
+  - DOMAIN-SUFFIX,goreadnovels.com
+  - DOMAIN-SUFFIX,joyfulnovel.com
+  - DOMAIN-SUFFIX,suiyuexiaoshuo.com

@@ -1,0 +1,10 @@
+# NAME: company
+payload:
+  - PROCESS-NAME,FinalShell
+  - PROCESS-NAME,securecrt
+  - PROCESS-NAME,SecureCRT
+  - PROCESS-NAME,securefx
+  - PROCESS-NAME,SecureFX
+  - DST-PORT,33312
+  - DST-PORT,28048
+  - IP-CIDR,117.50.38.169/32

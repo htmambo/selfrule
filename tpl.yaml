@@ -1,0 +1,217 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: Rule
+log-level: info
+external-controller: :9090
+dns:
+  enable: true
+  ipv6: false
+  nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+  fallback:
+    - 114.114.114.114
+    - 223.5.5.5
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+  nameserver-policy:
+    "geosite:cn": [114.114.114.114, 223.5.5.5]
+  default-nameserver:
+    - 1.1.1.1
+    - 8.8.8.8
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - '+.lan'
+    - 'localhost.ptlogin2.qq.com'
+    - 'dns.msftncsi.com'
+    - 'www.msftncsi.com'
+    - 'www.msftconnecttest.com'
+    - '+.market.xiaomi.com'
+    - 'time.*.com'
+    - 'ntp.*.com'
+hosts:
+  www.hswalldep.com: 117.50.38.169
+  dep.hongshu.com: 117.50.38.169
+  work.hongshu.com: 113.31.125.223
+  svn.hongshu.com: 106.75.154.11
+  dephw.hongshu.com: 152.32.217.143
+  # github.com: 140.82.116.3
+proxies: []
+proxy-groups:
+  - name: 🚀 节点选择
+    type: select
+    proxies:
+      - ♻️ 自动选择
+      - group
+      - single
+      - ☑️ 手动切换
+      - DIRECT
+  - name: ☑️ 手动切换
+    type: select
+    proxies:
+      - .*
+  - name: ♻️ 自动选择
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+    proxies:
+      - group
+      - single
+  - name: 🌍 国外媒体
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - group
+      - single
+      - 🎯 全球直连
+  - name: 📲 电报信息
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - group
+      - single
+      - ☑️ 手动切换
+      - 🎯 全球直连
+  - name: Ⓜ️ 微软服务
+    type: select
+    proxies:
+      - 🎯 全球直连
+      - 🚀 节点选择
+      - group
+      - single
+  - name: 🍎 苹果服务
+    type: select
+    proxies:
+      - 🎯 全球直连
+      - 🚀 节点选择
+      - group
+      - single
+  - name: 📢 谷歌FCM
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+      - ♻️ 自动选择
+      - group
+      - single
+  - name: 🎯 全球直连
+    type: select
+    proxies:
+      - DIRECT
+  - name: 🛑 全球拦截
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+  - name: 🐟 漏网之鱼
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+      - group
+      - single
+rules:
+  - RULE-SET,collection,DIRECT,no-resolve
+  - RULE-SET,adblock,REJECT
+  - RULE-SET,apple,🍎 苹果服务
+  - RULE-SET,company,公司跳板
+  - RULE-SET,direct,DIRECT
+  - RULE-SET,google_fcm,📢 谷歌FCM
+  - RULE-SET,media,🌍 国外媒体
+  - RULE-SET,microsoft,Ⓜ️ 微软服务
+  - RULE-SET,proxy,🚀 节点选择
+  - RULE-SET,proxy_ip,🚀 节点选择,no-resolve
+  - RULE-SET,singapore,新加坡节点
+  - RULE-SET,telegram,📲 电报信息
+  - IP-CIDR,31.186.86.47/32,波兰节点
+  - IP-CIDR,128.204.223.46/32,波兰节点
+  - IP-CIDR,85.194.246.69/32,波兰节点
+  - DOMAIN-SUFFIX,serv00.com,波兰节点
+  - IP-CIDR,103.53.199.100/32,香港节点
+  # 公司的海外项目，目前都在新加坡，所以这里加一条IP定位新加坡的都走新加坡节点
+  - GEOIP,SG,新加坡节点
+  - GEOIP,CN,🎯 全球直连
+  - MATCH,🐟 漏网之鱼
+
+rule-providers:
+  adblock: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/adblock.yaml
+    url: "https://raw.githubusercontent.com/htmambo/selfrule/refs/heads/main/adblock.yaml"
+  apple:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/apple.yaml
+    url: "https://raw.githubusercontent.com/htmambo/selfrule/refs/heads/main/apple.yaml"
+  collection: 
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/collection.yaml
+    url: "https://gist.githubusercontent.com/cnfree8964/0864fd1d2e88936a095fb40d74ce4993/raw/collection.yaml"
+  company:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/company.yaml
+    url: "https://raw.githubusercontent.com/htmambo/selfrule/refs/heads/main/company.yaml"
+  direct:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/direct.yaml
+    url: "https://raw.githubusercontent.com/htmambo/selfrule/refs/heads/main/direct.yaml"
+  google_fcm:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/google_fcm.yaml
+    url: "https://raw.githubusercontent.com/htmambo/selfrule/refs/heads/main/google_fcm.yaml"
+  media:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/media.yaml
+    url: "https://raw.githubusercontent.com/htmambo/selfrule/refs/heads/main/media.yaml"
+  microsoft:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/microsoft.yaml
+    url: "https://raw.githubusercontent.com/htmambo/selfrule/refs/heads/main/microsoft.yaml"
+  proxy:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/proxy.yaml
+    url: "https://raw.githubusercontent.com/htmambo/selfrule/refs/heads/main/proxy.yaml"
+  proxy_ip:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/proxy_ip.yaml
+    url: "https://raw.githubusercontent.com/htmambo/selfrule/refs/heads/main/proxy_ip.yaml"
+  singapore:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/singapore.yaml
+    url: "https://raw.githubusercontent.com/htmambo/selfrule/refs/heads/main/singapore.yaml"
+  telegram:
+    type: http
+    behavior: classical
+    format: yaml
+    path: ./ruleset/apple.yaml
+    url: "https://raw.githubusercontent.com/htmambo/selfrule/refs/heads/main/telegram.yaml"

@@ -1,0 +1,24 @@
+# NAME: direct
+payload:
+  - DOMAIN-SUFFIX,zhhp.me
+  - DOMAIN-SUFFIX,imzhp.top
+  - DOMAIN-SUFFIX,izhp.eu.org
+  - DOMAIN-SUFFIX,imzhp.com
+  - DOMAIN-SUFFIX,kanguo.net
+  - DOMAIN-SUFFIX,hongshux.cn
+  - DOMAIN-SUFFIX,work.hongshu.com
+  - DOMAIN-SUFFIX,work.yanqingkong.com
+  - DOMAIN-SUFFIX,hoping.gq
+  - DOMAIN,instant.arubanetworks.com
+  - DOMAIN,setmeup.arubanetworks.com
+  - DOMAIN,router.asus.com
+  - DOMAIN,www.asusrouter.com
+  - DOMAIN-SUFFIX,tailscale.com
+  - DOMAIN-SUFFIX,codeium.com
+  - DOMAIN-SUFFIX,baidu.com
+  - DOMAIN-SUFFIX,imgtu.com
+  - DOMAIN-KEYWORD,imgtu
+  - IP-CIDR,104.21.75.105/32
+  - DOMAIN-SUFFIX,cloudflare.com
+  - DOMAIN-SUFFIX,api.io.mi.com
+

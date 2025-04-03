@@ -21,4 +21,6 @@ payload:
   - IP-CIDR,104.21.75.105/32
   - DOMAIN-SUFFIX,cloudflare.com
   - DOMAIN-SUFFIX,api.io.mi.com
+  - DOMAIN-SUFFIX,youhuayouju.com
+  - DOMAIN-SUFFIX,hongshux.cn
 

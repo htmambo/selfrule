@@ -19,6 +19,7 @@ payload:
   - DOMAIN-SUFFIX,imgtu.com
   - DOMAIN-KEYWORD,imgtu
   - IP-CIDR,104.21.75.105/32
+  - IP-CIDR,192.168.0.0/16
   - DOMAIN-SUFFIX,cloudflare.com
   - DOMAIN-SUFFIX,api.io.mi.com
   - DOMAIN-SUFFIX,youhuayouju.com
